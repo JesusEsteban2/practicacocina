@@ -155,13 +155,28 @@ class DatabaseHelper (context: Context)
     companion object {
         const val DATABASE_NAME="tareastest.db"
         const val DATABASE_VERSION=1
-        const val TABLE_NAME="Tareas"
+        const val TABLE_NAME="Recipes"
         const val SQL_DELETE_TABLE_TAREAS="DROP TABLE IF EXISTS Tareas"
-        const val SQL_CREATE_ENTRIES_TAREAS ="CREATE TABLE Tareas (" +
-                "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "Task TEXT," +
-                "Doit BOOLEAN,"+
-                "Cat INTEGER)"
+        const val SQL_CREATE_ENTRIES_TAREAS ="CREATE TABLE $TABLE_NAME ("
+            +  "Id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        // Todo: Decidir si tomar el id o no tomarlo
+            + "Id INTEGER,"
+            +"caloriesPerServing INTEGER,"
+            +"cookTimeMinutes INTEGER,"
+            +"cuisine TEXT,"
+            +"difficulty TEXT,"
+            +"image TEXT,"
+            +"ingredients List<TEXT>,"
+            +"instructions List<TEXT>,"
+            val mealType: List<TEXT>,
+            val name: TEXT,
+            val prepTimeMinutes: INTEGER,
+            val rating: Double,
+            val reviewCount: INTEGER,
+            val servings: INTEGER,
+            val tags: List<TEXT>,
+            val userId: INTEGER
+        +")"
         val SQL_TAREAS_COLUMS:List<String> = listOf("Task","Doit","Cat")
     }
 }
