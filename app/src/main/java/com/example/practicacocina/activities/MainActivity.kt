@@ -1,4 +1,4 @@
-package com.example.practicacocina.Activities
+package com.example.practicacocina.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
