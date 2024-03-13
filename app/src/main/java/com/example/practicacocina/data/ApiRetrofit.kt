@@ -1,7 +1,6 @@
 package com.example.practicacocina.data
 
-import DaoReceta
-import android.util.Log
+import DaoCocina
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -10,47 +9,38 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
-class ApiRetrofit {
 
-    fun getService() {
-        val service = RetrofitBuilder.getService()
+class ApiRetrofit () {
+    var respon: Response<DaoCocina>? = null
+    val serv = getService()
 
+    fun getResponse(): Response<DaoCocina>? {
+
+        // Lanza la petición de internet en 2º plano
         CoroutineScope(Dispatchers.IO).launch {
 
-            val response = service.searchByName(query)
+            respon = serv.searchById("")
 
-
-            runOnUiThread {
-                // Modificar UI
-                if ((response.body()!!.listSuperHero != null) && response.isSuccessful == true) {
-                    Log.i("HTTP", "respuesta correcta :)")
-                    Log.i("HTTP", response.body().toString())
-                    superheroList = response.body()!!.listSuperHero
-                    adapter.updateItems(superheroList)
-                } else {
-                    Log.i("HTTP", "respuesta erronea :(")
-                }
-            }
         }
+
+        return respon
     }
-}
 
+    fun searchByQuery(query:String): Response<DaoCocina>? {
 
-interface RetrofitService {
+        // Lanza la petición de internet en 2º plano
+        CoroutineScope(Dispatchers.IO).launch {
 
-    @GET("search/{query}")
-    suspend fun searchByName(@Path("query") query: String?): Response<SuperHeroResponse>
+            respon = serv.searchByName(query)
 
-    @GET("{id}")
-    suspend fun searchById(@Path("id") id:String?):Response<DaoReceta>
+        }
 
-}
-
-object RetrofitBuilder {
+        return respon
+    }
 
     fun getService():RetrofitService{
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://www.superheroapi.com/api.php/7252591128153666/")
+            .baseUrl(RETROFIT_BASEURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -58,4 +48,20 @@ object RetrofitBuilder {
 
         return service
     }
+
+    companion object {
+        val RETROFIT_BASEURL="https://dummyjson.com/recipes/"
+    }
 }
+
+
+interface RetrofitService {
+
+    @GET("search/{query}")
+    suspend fun searchByName(@Path("query") query: String?): Response<DaoCocina>
+
+    @GET("{id}")
+    suspend fun searchById(@Path("id") id:String?):Response<DaoCocina>
+
+}
+

@@ -1,6 +1,13 @@
 
 import com.google.gson.annotations.SerializedName
 
+class Receta{
+
+    fun queryAll():List<DaoReceta> {
+
+        return TODO("Provide the return value")
+    }
+}
 
 data class DaoCocina(
     @SerializedName ("limit") val limit: Int,
@@ -9,7 +16,8 @@ data class DaoCocina(
     @SerializedName ("total") val total: Int
 )
 
-data class DaoReceta(
+data class DaoReceta (
+
     @SerializedName("id") val id: Int,
     @SerializedName("caloriesPerServing") val calPerServing: Int,
     @SerializedName("cookTimeMinutes") val cookTimeMin: Int,
@@ -25,7 +33,7 @@ data class DaoReceta(
     @SerializedName("reviewCount") val reviewCount: Int,
     @SerializedName("servings") val servings: Int,
     @SerializedName("tags") val tags: List<String>,
-    @SerializedName("userId") val userId: Int
+    @SerializedName("userId") val userId: Int,
 )
 
 
