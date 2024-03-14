@@ -3,3 +3,36 @@ https://dummyjson.com/recipes
 
 Para futuro
 https://dev.kiwilimon.com/documentacion
+
+ private fun onTexClickListener(position: Int) {
+
+        val context: Context = bindingRecipeList.root.context
+        val intent = Intent(context, DetailActivity::class.java)
+        var mod: Int = position
+        intent.putExtra("MODE", mod)
+        context.startActivity(intent)
+    }
+
+
+    CoroutineScope(Dispatchers.IO).launch {
+
+                respon = serv.searchByName("1")
+                Log.i("HTTP", "La llamada acabo: "+respon?.isSuccessful.toString())
+
+            }
+            runOnUiThread {
+                // Modificar UI en primer plano
+                if (respon==null){
+                    println("Respuesta nula")
+                    finish()
+                }
+                if ((respon?.body()?.recipes != null)) {
+                    Log.i("HTTP", "respuesta correcta :)")
+                    Log.i("HTTP", "La llamada acabo: "+respon?.isSuccessful.toString())
+                    dataSet = respon?.body()!!.recipes
+                    adapter.updateItems(dataSet)
+                } else {
+                    Log.i("HTTP", "respuesta erronea :(")
+                    Log.i("HTTP", "La llamada acabo: "+respon?.isSuccessful.toString())
+                }
+            }

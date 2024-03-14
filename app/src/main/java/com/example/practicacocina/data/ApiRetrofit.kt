@@ -1,6 +1,7 @@
 package com.example.practicacocina.data
 
 import DaoCocina
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,15 +12,34 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 class ApiRetrofit () {
-    var respon: Response<DaoCocina>? = null
-    val serv = getService()
+    lateinit var respon:Response<DaoCocina>
 
-    fun getResponse(): Response<DaoCocina>? {
+    fun getServ(): RetrofitService {
+        var serv=getService()
+        return serv
+    }
+
+    fun getResponse(): Response<DaoCocina> {
 
         // Lanza la petición de internet en 2º plano
         CoroutineScope(Dispatchers.IO).launch {
 
-            respon = serv.searchAll()
+            respon = getService().searchAll()
+
+            Log.i("HTTP", "GRAR La llamada acabo: " + respon?.isSuccessful.toString())
+        }
+
+        return respon
+    }
+
+
+
+    fun searchById(id:String): Response<DaoCocina>? {
+
+        // Lanza la petición de internet en 2º plano
+        CoroutineScope(Dispatchers.IO).launch {
+
+            respon = getService().searchById(id)
 
         }
 
@@ -31,14 +51,14 @@ class ApiRetrofit () {
         // Lanza la petición de internet en 2º plano
         CoroutineScope(Dispatchers.IO).launch {
 
-            respon = serv.searchByName(query)
+            respon = getService().searchByName(query)
 
         }
 
         return respon
     }
 
-    fun getService():RetrofitService{
+    private fun getService():RetrofitService{
         val retrofit = Retrofit.Builder()
             .baseUrl(RETROFIT_BASEURL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -50,20 +70,20 @@ class ApiRetrofit () {
     }
 
     companion object {
-        val RETROFIT_BASEURL="https://dummyjson.com/recipes"
+        val RETROFIT_BASEURL="https://dummyjson.com"
     }
 }
 
 
 interface RetrofitService {
 
-    @GET("search/{query}")
+    @GET("/recipes/search?q={query}")
     suspend fun searchByName(@Path("query") query: String?): Response<DaoCocina>
 
-    @GET("{id}")
+    @GET("/recipes/{id}")
     suspend fun searchById(@Path("id") id:String?):Response<DaoCocina>
 
-    @GET()
+    @GET("/recipes/")
     suspend fun searchAll():Response<DaoCocina>
 
 }

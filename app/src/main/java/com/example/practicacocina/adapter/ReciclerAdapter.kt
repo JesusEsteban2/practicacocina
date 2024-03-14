@@ -10,20 +10,23 @@ import android.view.ViewGroup
 import com.example.practicacocina.R
 import com.example.practicacocina.databinding.RecipeListBinding
 import android.view.LayoutInflater
-import androidx.core.view.get
 import com.example.practicacocina.activities.DetailActivity
+import com.example.practicacocina.activities.MainActivity
 import com.example.practicacocina.activities.MainActivity.Companion.dataSet
+import com.squareup.picasso.Picasso
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.currentCoroutineContext
 
 
 class ReciclerAdapter (val onDelClickListener: (position:Int) -> Unit ) :
-    RecyclerView.Adapter<ViewHolder>() {
-
-    lateinit var binding: RecipeListBinding
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = RecipeListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-
+    RecyclerView.Adapter<ReViewHolder>() {
+    lateinit var bindingRecipeList:RecipeListBinding
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReViewHolder {
+        // Prepara el binding de recipe_list
+        bindingRecipeList = RecipeListBinding.inflate(LayoutInflater.from(parent.context),
+            parent, false)
+        //Devuelve el viewholder construido
+        return ReViewHolder(bindingRecipeList)
 
     }
 
@@ -31,20 +34,10 @@ class ReciclerAdapter (val onDelClickListener: (position:Int) -> Unit ) :
      * Sobre escritura de onBindViewHolder
      * Establece los valores de los eventos OnClick y renderiza la linea.
      */
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ReViewHolder, position: Int) {
+
         holder.render(dataSet[position])
 
-        // Listener para el nombre de la receta
-        binding.recipeName.setOnClickListener({ onDoClickListener(position) })
-
-        //listener para dificultad
-        binding.recipeDifficulty.setOnClickListener({ onTexClickListener(position) })
-
-        //Listener para el tiempo
-        binding.recipeTime.setOnClickListener({ onDelClickListener(position) })
-
-        // Listener para toda la línea.
-        //holder.itemView.setOnClickListener { onDelClickListener(position) }
     }
 
     /**
@@ -62,52 +55,22 @@ class ReciclerAdapter (val onDelClickListener: (position:Int) -> Unit ) :
         notifyDataSetChanged()
     }
 
-
-    private fun onDoClickListener(pos: Int) {
-
-        // var da = dataSet[pos]
-        // da.(binding.root.context).update(da)
-        // dataSet = Receta().queryAll()
-        // updateItems(dataSet)
-    }
-
-    /**
-     * Detecta el click sobre un elemento y pasa a la pantalla de
-     * detalle de dicho elemento.
-     */
-    private fun onTexClickListener(position: Int) {
-        val context: Context = binding.root.context
-        val intent = Intent(context, DetailActivity::class.java)
-        var mod: Int = position
-        intent.putExtra("MODE", mod)
-        context.startActivity(intent)
-    }
-
 }
 
 
-class ViewHolder(val binding: RecipeListBinding) :
+class ReViewHolder(val binding: RecipeListBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
         fun render(receta: DaoReceta) {
-            var context = binding.root.context
 
             //Visualiza el contenido de la receta.
-            //var icon: Drawable? = context.getDrawable(R.drawable.uncheck)
-            //var te: String = context.getString(R.string.Pending)
-            // if (tarea.doit) {
-            //    icon = context.getDrawable(R.drawable.checkmark)
-            //    te = context.getString(R.string.Done)
-            //}
-            //binding.taskChip.chipIcon = icon
-            //binding.taskChip.text = te
-            //binding.taskText.text = tarea.task
+            binding.recipeName.text= receta.name
+            binding.recipeTime.text=receta.prepTimeMin.toString()
+            binding.recipeDifficulty.text=receta.difficulty
+            Picasso.get().load(receta.image).into(binding.recipeImage)
 
         }
 
-        fun update(dataSet: List<DaoReceta>, adapter: ReciclerAdapter) {
-            adapter.updateItems(dataSet)
-        }
 
     }
 

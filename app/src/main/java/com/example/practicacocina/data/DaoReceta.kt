@@ -37,29 +37,5 @@ data class DaoReceta (
 )
 
 
-data class SuperHeroResponse (
-    @SerializedName("response") val response: String,
-    @SerializedName("results") val listSuperHero: List<SuperHero>,
-    @SerializedName("results-for") val query: String
-)
 
-data class SuperHero (
-    @SerializedName("id") val id:String,
-    @SerializedName("name") val name:String,
-    @SerializedName("biography") val biography: Biography,
-    @SerializedName("image") val httpImage:Image
-)
 
-data class Biography(
-    // @SerializedName ("") aliases: List<String>,
-    @SerializedName("alignment")val alignment: String,
-    @SerializedName("alter-egos")val alterEgos: String,
-    @SerializedName("first-appearance")val firstAppearance: String,
-    @SerializedName("full-name")val fullName: String,
-    @SerializedName("place-of-birth")val placeBirth: String,
-    @SerializedName("publisher") val publisher: String
-)
-
-data class Image(
-    @SerializedName("url") val url: String
-)
