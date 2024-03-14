@@ -19,7 +19,7 @@ class ApiRetrofit () {
         // Lanza la petición de internet en 2º plano
         CoroutineScope(Dispatchers.IO).launch {
 
-            respon = serv.searchById("")
+            respon = serv.searchAll()
 
         }
 
@@ -50,7 +50,7 @@ class ApiRetrofit () {
     }
 
     companion object {
-        val RETROFIT_BASEURL="https://dummyjson.com/recipes/"
+        val RETROFIT_BASEURL="https://dummyjson.com/recipes"
     }
 }
 
@@ -62,6 +62,9 @@ interface RetrofitService {
 
     @GET("{id}")
     suspend fun searchById(@Path("id") id:String?):Response<DaoCocina>
+
+    @GET()
+    suspend fun searchAll():Response<DaoCocina>
 
 }
 

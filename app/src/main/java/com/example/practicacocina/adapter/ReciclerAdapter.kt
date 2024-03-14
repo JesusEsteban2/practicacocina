@@ -12,10 +12,10 @@ import com.example.practicacocina.databinding.RecipeListBinding
 import android.view.LayoutInflater
 import androidx.core.view.get
 import com.example.practicacocina.activities.DetailActivity
+import com.example.practicacocina.activities.MainActivity.Companion.dataSet
 
 
-class ReciclerAdapter (var dataSet: List<DaoReceta>,
-                       val onDelClickListener: (position:Int) -> Unit ) :
+class ReciclerAdapter (val onDelClickListener: (position:Int) -> Unit ) :
     RecyclerView.Adapter<ViewHolder>() {
 
     lateinit var binding: RecipeListBinding
