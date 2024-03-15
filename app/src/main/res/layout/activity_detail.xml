@@ -6,4 +6,118 @@
     android:layout_height="match_parent"
     tools:context=".activities.DetailActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_centerline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".50"
+        />
+
+    <ImageView
+        android:id="@+id/reImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/vertical_centerline"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/reName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la receta"
+        app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/reCuisine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo de cocina"
+        app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+        app:layout_constraintTop_toBottomOf="@+id/reName"
+        />
+
+    <TextView
+        android:id="@+id/reDifficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dificultad"
+        app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+        app:layout_constraintTop_toBottomOf="@+id/reCuisine"
+        />
+
+    <TextView
+        android:id="@+id/reRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Puntuacion"
+        app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+        app:layout_constraintTop_toBottomOf="@+id/reDifficulty"
+        />
+
+    <TextView
+        android:id="@+id/rePrepTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tiempo de preparacion"
+        app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+        app:layout_constraintTop_toBottomOf="@+id/reRating"
+        />
+
+    <TextView
+        android:id="@+id/reCookTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tiempo de cocinado"
+        app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+        app:layout_constraintTop_toBottomOf="@+id/rePrepTime"
+        />
+
+    <TextView
+        android:id="@+id/reCaloriesPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calorias por racion"
+        app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+        app:layout_constraintTop_toBottomOf="@+id/reCookTime"
+        />
+
+    <TextView
+        android:id="@+id/reIngredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingredientes: Pizza dough, Tomato sauce, Fresh mozzarella cheese, Fresh basil leaves, Olive oil, Salt and pepper to taste"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reImage"
+        />
+
+    <TextView
+        android:id="@+id/reInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instrucciones:Preheat the oven to 475°F (245°C)., Roll out the pizza dough and spread
+         tomato sauce evenly, Top with slices of fresh mozzarella and fresh basil leaves, Drizzle with olive
+          oil and season with salt and pepper. Bake in the preheated oven for 12-15 minutes or until the
+          crust is golden brown. Slice and serve hot."
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reIngredients"
+        />
+
+    <TextView
+        android:id="@+id/reType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo de Cocina: Pizza, Italian"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reInstructions"
+        />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

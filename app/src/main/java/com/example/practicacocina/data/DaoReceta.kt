@@ -30,10 +30,10 @@ data class DaoReceta (
     @SerializedName("name") val name: String,
     @SerializedName("prepTimeMinutes") val prepTimeMin: Int,
     @SerializedName("rating") val rating: Double,
-    @SerializedName("reviewCount") val reviewCount: Int,
-    @SerializedName("servings") val servings: Int,
-    @SerializedName("tags") val tags: List<String>,
-    @SerializedName("userId") val userId: Int,
+    //@SerializedName("reviewCount") val reviewCount: Int,
+    //@SerializedName("servings") val servings: Int,
+    //@SerializedName("tags") val tags: List<String>,
+    //@SerializedName("userId") val userId: Int,
 )
 
 

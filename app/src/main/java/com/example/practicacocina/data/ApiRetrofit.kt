@@ -1,15 +1,12 @@
 package com.example.practicacocina.data
 
 import DaoCocina
-import android.util.Log
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 class ApiRetrofit () {
     lateinit var respon:Response<DaoCocina>
@@ -19,44 +16,8 @@ class ApiRetrofit () {
         return serv
     }
 
-    fun getResponse(): Response<DaoCocina> {
-
-        // Lanza la petición de internet en 2º plano
-        CoroutineScope(Dispatchers.IO).launch {
-
-            respon = getService().searchAll()
-
-            Log.i("HTTP", "GRAR La llamada acabo: " + respon?.isSuccessful.toString())
-        }
-
-        return respon
-    }
 
 
-
-    fun searchById(id:String): Response<DaoCocina>? {
-
-        // Lanza la petición de internet en 2º plano
-        CoroutineScope(Dispatchers.IO).launch {
-
-            respon = getService().searchById(id)
-
-        }
-
-        return respon
-    }
-
-    fun searchByQuery(query:String): Response<DaoCocina>? {
-
-        // Lanza la petición de internet en 2º plano
-        CoroutineScope(Dispatchers.IO).launch {
-
-            respon = getService().searchByName(query)
-
-        }
-
-        return respon
-    }
 
     private fun getService():RetrofitService{
         val retrofit = Retrofit.Builder()
@@ -70,20 +31,20 @@ class ApiRetrofit () {
     }
 
     companion object {
-        val RETROFIT_BASEURL="https://dummyjson.com"
+        val RETROFIT_BASEURL="https://dummyjson.com/"
     }
 }
 
 
 interface RetrofitService {
 
-    @GET("/recipes/search?q={query}")
-    suspend fun searchByName(@Path("query") query: String?): Response<DaoCocina>
+    //@GET("recipes/{query}")
+    // suspend fun searchByText(@Path("query") query: String?): Response<DaoCocina>
 
-    @GET("/recipes/{id}")
+    @GET("recipes/{id}")
     suspend fun searchById(@Path("id") id:String?):Response<DaoCocina>
 
-    @GET("/recipes/")
+    @GET("recipes/")
     suspend fun searchAll():Response<DaoCocina>
 
 }

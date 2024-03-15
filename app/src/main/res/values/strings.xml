@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">PracticaCocina</string>
+    <string name="recipeName">Name</string>
+    <string name="caloriesPerServing">Calories Per Serving</string>
+    <string name="cookTimeMinutes">Cook Time Min</string>
+    <string name="cuisine">Cuisine</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="rating">Rating</string>
+    <string name="prepTimeMin">Prep. Time Min</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="mealType">Meal Type</string>
+
 </resources>

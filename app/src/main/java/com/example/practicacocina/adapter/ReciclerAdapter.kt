@@ -5,6 +5,7 @@ import Receta
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.text.Editable
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import com.example.practicacocina.R
@@ -18,7 +19,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.currentCoroutineContext
 
 
-class ReciclerAdapter (val onDelClickListener: (position:Int) -> Unit ) :
+class ReciclerAdapter (val onClickListener: (position:Int) -> Unit ) :
     RecyclerView.Adapter<ReViewHolder>() {
     lateinit var bindingRecipeList:RecipeListBinding
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReViewHolder {
@@ -37,6 +38,7 @@ class ReciclerAdapter (val onDelClickListener: (position:Int) -> Unit ) :
     override fun onBindViewHolder(holder: ReViewHolder, position: Int) {
 
         holder.render(dataSet[position])
+        holder.itemView.setOnClickListener { onClickListener(position) }
 
     }
 
@@ -64,10 +66,11 @@ class ReViewHolder(val binding: RecipeListBinding) :
         fun render(receta: DaoReceta) {
 
             //Visualiza el contenido de la receta.
-            binding.recipeName.text= receta.name
-            binding.recipeTime.text=receta.prepTimeMin.toString()
-            binding.recipeDifficulty.text=receta.difficulty
             Picasso.get().load(receta.image).into(binding.recipeImage)
+            binding.recipeName.setText(receta.name)
+            binding.prepTimeMin.setText(receta.prepTimeMin.toString())
+            binding.recipeDifficulty.text=receta.difficulty
+
 
         }
 

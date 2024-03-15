@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PracticaCocina</string>
+    <string name="recipeName">Nombre</string>
+    <string name="caloriesPerServing">Calorías por servicio</string>
+    <string name="cookTimeMinutes">Tiempo de cocinado Min.</string>
+    <string name="cuisine">Tipo de Cocina</string>
+    <string name="difficulty">Dificultad</string>
+    <string name="rating">Puntuación</string>
+    <string name="prepTimeMin">Tiempo de Preparación Min.</string>
+    <string name="ingredients">Ingredientes</string>
+    <string name="instructions">Instrucciones</string>
+    <string name="mealType">Tipo de Comida</string>
+</resources>
