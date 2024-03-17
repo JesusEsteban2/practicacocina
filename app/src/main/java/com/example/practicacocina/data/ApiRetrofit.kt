@@ -11,14 +11,13 @@ import retrofit2.http.Query
 class ApiRetrofit () {
     lateinit var respon:Response<DaoCocina>
 
+    // Devuelve el servicio de Retrofit
     fun getServ(): RetrofitService {
         var serv=getService()
         return serv
     }
 
-
-
-
+    // Prepara el servicio para ser devuelto
     private fun getService():RetrofitService{
         val retrofit = Retrofit.Builder()
             .baseUrl(RETROFIT_BASEURL)

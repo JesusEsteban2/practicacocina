@@ -10,5 +10,6 @@
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
     <string name="mealType">Meal Type</string>
+    <string name="search">Search</string>
 
 </resources>
