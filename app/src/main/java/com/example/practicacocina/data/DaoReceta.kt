@@ -19,6 +19,7 @@ data class DaoCocina(
 data class DaoReceta (
 
     @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String,
     @SerializedName("caloriesPerServing") val calPerServing: Int,
     @SerializedName("cookTimeMinutes") val cookTimeMin: Int,
     @SerializedName("cuisine") val cuisine: String,
@@ -27,7 +28,6 @@ data class DaoReceta (
     @SerializedName("ingredients") val ingredients: List<String>,
     @SerializedName("instructions") val instructions: List<String>,
     @SerializedName("mealType") val mealType: List<String>,
-    @SerializedName("name") val name: String,
     @SerializedName("prepTimeMinutes") val prepTimeMin: Int,
     @SerializedName("rating") val rating: Double,
     //@SerializedName("reviewCount") val reviewCount: Int,

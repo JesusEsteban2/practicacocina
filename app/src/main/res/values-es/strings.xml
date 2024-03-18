@@ -13,4 +13,6 @@
     <string name="mealType">Tipo de Comida</string>
     <string name="search">Buscar</string>
     <string name="cal_ps">Cal/Racion</string>
+    <string name="preparation">Preparación:</string>
+    <string name="ingredi">Ingredientes:</string>
 </resources>

@@ -55,6 +55,14 @@ dependencies {
     // Implementation Picasso 2.8
     implementation ("com.squareup.picasso:picasso:2.8")
 
+    val sqlite_version = "2.4.0"
+    // Dependencias SQLite Java
+    //implementation("androidx.sqlite:sqlite:$sqlite_version")
+    // Dependencias SQLite Kotlin
+    implementation("androidx.sqlite:sqlite-ktx:$sqlite_version")
+    // Implementation of the AndroidX SQLite interfaces via the Android framework APIs.
+    // implementation("androidx.sqlite:sqlite-framework:$sqlite_version")
+
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

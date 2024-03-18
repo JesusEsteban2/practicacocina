@@ -12,4 +12,6 @@
     <string name="mealType">Meal Type</string>
     <string name="search">Search</string>
     <string name="cal_ps">Cal/Serv.</string>
+    <string name="preparation">Preparation:</string>
+    <string name="ingredi">Ingredients:</string>
 </resources>

@@ -55,6 +55,7 @@
         android:id="@+id/reCuisine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@+id/cuisIcon"
         app:layout_constraintTop_toBottomOf="@+id/reName"
@@ -65,6 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="end"
+        android:textSize="16sp"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toStartOf="@id/vertical_centerline"
         app:layout_constraintTop_toBottomOf="@+id/reCuisine"
@@ -93,6 +95,7 @@
         android:id="@+id/rePrepTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/timeIcon"
         app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
         />
@@ -102,6 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" + "
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/rePrepTime"
         app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
         />
@@ -110,6 +114,7 @@
         android:id="@+id/reCookTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/plusSymbol"
         app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
         />
@@ -118,6 +123,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cal_ps"
+        android:textSize="16sp"
+        android:layout_marginStart="5dp"
         app:layout_constraintStart_toStartOf="@id/vertical_centerline"
         app:layout_constraintTop_toBottomOf="@+id/reCookTime"
         />
@@ -126,6 +133,7 @@
         android:id="@+id/reCaloriesPS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/reCaloriesTit"
         app:layout_constraintTop_toBottomOf="@+id/reCookTime"
         />
@@ -134,7 +142,8 @@
         android:id="@+id/reType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Comida/cena"
+        android:layout_marginStart="5dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/vertical_centerline"
         app:layout_constraintTop_toBottomOf="@+id/reCaloriesPS"
         />
@@ -145,7 +154,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Ingredientes:"
+        android:text="@string/ingredi"
+        android:layout_marginStart="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reImage"
         />
@@ -155,6 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:layout_marginStart="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texTitIngre"
         />
@@ -164,8 +175,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Preparacion:"
+        android:text="@string/preparation"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reIngredients"
         />
@@ -176,6 +188,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:paddingBottom="10dp"
+        android:layout_marginStart="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texTitInstru"
         />
