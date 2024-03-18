@@ -1,22 +1,13 @@
 package com.example.practicacocina.adapter
 
 import DaoReceta
-import Receta
-import android.content.Context
-import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.text.Editable
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
-import com.example.practicacocina.R
 import com.example.practicacocina.databinding.RecipeListBinding
 import android.view.LayoutInflater
-import com.example.practicacocina.activities.DetailActivity
-import com.example.practicacocina.activities.MainActivity
 import com.example.practicacocina.activities.MainActivity.Companion.dataSet
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.currentCoroutineContext
+
 
 
 class ReciclerAdapter (val onClickListener: (position:Int) -> Unit ) :
@@ -33,7 +24,9 @@ class ReciclerAdapter (val onClickListener: (position:Int) -> Unit ) :
 
     /**
      * Sobre escritura de onBindViewHolder
-     * Establece los valores de los eventos OnClick y renderiza la linea.
+     * Pasa el evento OnClick al Holder y renderiza la linea.
+     * @param holder Holder del ReciclerView
+     * @param position Linea a renderizar
      */
     override fun onBindViewHolder(holder: ReViewHolder, position: Int) {
 
@@ -69,8 +62,19 @@ class ReViewHolder(val binding: RecipeListBinding) :
             Picasso.get().load(receta.image).into(binding.recipeImage)
             binding.recipeName.setText(receta.name)
             binding.prepTimeMin.setText(receta.prepTimeMin.toString())
+            binding.reCookTime.setText(receta.cookTimeMin.toString())
+            var ra:Float=0F
+
+            ra = when (receta.difficulty){
+                "Easy" -> 1F
+                "Medium" -> 2F
+                "Hard" -> 3F
+                else -> 0F
+            }
+
             binding.recipeDifficulty.text=receta.difficulty
 
+            binding.recipeRating.rating=receta.rating.toFloat()
 
         }
 

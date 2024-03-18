@@ -1,81 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/recipeImage"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/recipeNameLa"
-        android:layout_width="180dp"
-        android:layout_height="55dp"
-        android:hint="@string/recipeName"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintTop_toTopOf="@id/recipeImage"
-        app:layout_constraintStart_toEndOf="@+id/recipeImage"
-        >
-
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/recipeName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Brazilian Caipirinha"
-        android:enabled="false"
-        android:textSize="12dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintTop_toTopOf="@id/recipeImage"
+        android:hint="@string/recipeName"
         app:layout_constraintStart_toEndOf="@+id/recipeImage"
         app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/prepTimeMinLa"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/prepTimeMin"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintTop_toBottomOf="@id/recipeNameLa"
-        app:layout_constraintStart_toEndOf="@id/recipeImage"
+        app:layout_constraintTop_toTopOf="parent"
         >
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/prepTimeMin"
-            android:layout_width="match_parent"
+            android:id="@+id/recipeName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5"
-            android:enabled="false"
             android:layout_marginStart="5dp"
-            app:layout_constraintTop_toTopOf="@+id/recipeNameLa"
+            android:enabled="false"
+            android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@+id/recipeImage"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/recipeImage"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageView
+            android:id="@+id/timeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/time_24"
+            app:layout_constraintStart_toEndOf="@+id/recipeImage"
+            app:layout_constraintTop_toBottomOf="@id/recipeNameLa"
+            />
+
+        <TextView
+            android:id="@+id/prepTimeMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:enabled="false"
+            android:text="5"
+            app:layout_constraintStart_toEndOf="@+id/timeIcon"
+            app:layout_constraintTop_toBottomOf="@+id/recipeNameLa"
+            />
 
     <TextView
-        android:id="@+id/recipeDifficulty"
+        android:id="@+id/plusSymbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Easy"
-        app:layout_constraintTop_toBottomOf="@+id/prepTimeMinLa"
-        app:layout_constraintEnd_toEndOf="@+id/prepTimeMinLa"
+        android:text=" + "
+        app:layout_constraintStart_toEndOf="@+id/prepTimeMin"
+        app:layout_constraintTop_toBottomOf="@+id/recipeNameLa"
         />
 
+    <TextView
+        android:id="@+id/reCookTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/plusSymbol"
+        app:layout_constraintTop_toBottomOf="@+id/recipeNameLa"
+        />
 
+    <TextView
+        android:id="@+id/reDifTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/difficulty"
+        app:layout_constraintStart_toEndOf="@+id/recipeImage"
+        app:layout_constraintTop_toBottomOf="@+id/reCookTime"
+        />
 
+        <TextView
+            android:id="@+id/recipeDifficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="5"
+            app:layout_constraintStart_toEndOf="@+id/reDifTitle"
+            app:layout_constraintTop_toBottomOf="@+id/reCookTime"
+            />
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/recipeRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:progressTint="@color/yelow"
+        app:layout_constraintStart_toEndOf="@+id/recipeImage"
+        app:layout_constraintTop_toBottomOf="@+id/recipeDifficulty"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

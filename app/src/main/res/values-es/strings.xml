@@ -11,4 +11,6 @@
     <string name="ingredients">Ingredientes</string>
     <string name="instructions">Instrucciones</string>
     <string name="mealType">Tipo de Comida</string>
+    <string name="search">Buscar</string>
+    <string name="cal_ps">Cal/Racion</string>
 </resources>

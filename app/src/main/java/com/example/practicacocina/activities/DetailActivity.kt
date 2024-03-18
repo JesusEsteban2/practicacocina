@@ -15,58 +15,63 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Inicializa bindin para acceder a los objetos
         binding= ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Recupera intent putExtra con el registro a mostrar
         val idS=intent.extras?.getString("EXTRA_ID")?:"-1"
         var id=idS.toInt()
-
+        // Toma el elemento a mostrar de la colección
         var recipe=dataSet[id]
-
+        //Visualiza la receta seleccionada
         render(recipe)
 
     }
 
+    /**
+     * Función para mostrar la receta
+     * @param re receta a mostrar en el Layout
+     */
     fun render(re: DaoReceta){
 
         Picasso.get().load(re.image).into(binding.reImage)
         binding.reName.text=re.name
         binding.reCuisine.text=re.cuisine
         binding.reDifficulty.text=re.difficulty
-        binding.reRating.text=re.rating.toString()
+        binding.recipeRatingn.rating=re.rating.toFloat()
         binding.rePrepTime.text=re.prepTimeMin.toString()
         binding.reCookTime.text=re.cookTimeMin.toString()
         binding.reCaloriesPS.text=re.calPerServing.toString()
 
-        var ingr:String?= null
-        for (ing in re.ingredients){
-            if (ingr==null) {
-                ingr=ing
-            } else {
-                ingr=ingr+", "+ing
-            }
-        }
+        var ingr=listToString(re.ingredients)
+
         binding.reIngredients.text=ingr
 
-        var inst:String?=null
-        for (ins in re.instructions){
-            if (inst==null) {
-                inst=ins
-            } else {
-                inst=inst+", "+ins
-            }
-        }
+        var inst= listToString(re.instructions)
+
         binding.reInstructions.text=inst
 
-        var type:String?=null
-        for (typ in re.mealType){
-            if (type==null) {
-                type=typ
-            } else {
-                type=type+", "+typ
-            }
-        }
+        var type=listToString(re.mealType)
+
         binding.reType.text=type
 
+    }
+
+    /**
+     * Función para convertir una lista en un string separado por comas
+     */
+    fun listToString(l:List<String>):String{
+        // Inicializa String a devolver
+        var retString:String=""
+        // Para cada elemento e de la lista l
+        for (e in l){
+            if (retString=="") {
+                retString=e
+            } else {
+                retString=retString+"\n"+e
+            }
+        }
+        return retString
     }
 }

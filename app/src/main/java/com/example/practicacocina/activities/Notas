@@ -60,3 +60,8 @@ https://dev.kiwilimon.com/documentacion
                     )
 
                     dataSet = listOf<DaoReceta>(recip)
+
+
+                      private fun SearchView.setOnCloseListener(function: () -> Unit) {
+                            getFromRetro()
+                        }

@@ -8,12 +8,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practicacocina.R
 import com.example.practicacocina.adapter.ReciclerAdapter
 import com.example.practicacocina.data.ApiRetrofit
-import com.example.practicacocina.data.RetrofitService
 import com.example.practicacocina.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,44 +29,48 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //Inicializar adapter
-        adapter = ReciclerAdapter({ onClick(it) })
-
         // Enicializar binding para acceso a los componentes
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Inicializar adapter
+        adapter = ReciclerAdapter{ onClick(it) }
 
         // Asignar el adapter al reciclerView
         binding.recipeReciclerW.adapter = adapter
         binding.recipeReciclerW.layoutManager = LinearLayoutManager(this)
 
         // Hacer la llamada al API-Rest de Retrofit
+        // para obtener los datos del API
         getFromRetro()
 
 
     }
 
     //Cargar Action Bar Menu
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         // Carga menu de Scr/menu
         menuInflater.inflate(R.menu.menu_action_bar, menu)
 
-        // carga la accion buscar
-        var itemSe = menu?.findItem(R.id.search_button)
-
-        var searchView=itemSe?.actionView as SearchView
-
+        // carga el control para la accion buscar
+        val itemSe = menu?.findItem(R.id.search_button)
+        // Asigna el SearchView al control
+        val searchView=itemSe?.actionView as SearchView
+        //Define las funciones abstractas del objeto
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query=="*") {
+
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                if (query.isNullOrEmpty()) {
                     getFromRetro()
                     Log.i("BUSCA","Busqueda Todos")
                 } else {
-                    var data= dataSet.filterIndexed{ index, daoReceta ->
+                    val data= dataSet.filterIndexed{ index, daoReceta ->
                         dataSet[index].name.contains(query as CharSequence) }
                     Log.i("BUSCA","Busqueda con texto")
                     updateView(data,adapter)
@@ -77,21 +79,20 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-
-                return false
-            }
-
         })
 
+        //Termina la configuración del menu en Super
         return super.onCreateOptionsMenu(menu)
 
     }
 
 
-
+    /**
+     * Funcion para obtener los datos del API con Retrofit
+     * Los datos recuperados se almacenan en el companion objet dataSet
+     */
     fun getFromRetro(){
-        var serv = ApiRetrofit().getServ()
+        val serv = ApiRetrofit().getServ()
         var respon: Response<DaoCocina>?
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -115,6 +116,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Función OnClick para el adapter del ReciclerView
+     * Recibe la posición (Elemento) al que se ha hecho click y carga la
+     * pantalla de detalle (DetaidActivity) de dicho elemento.
+     */
     fun onClick(posi:Int){
         val intent = Intent(this, DetailActivity::class.java)
 
@@ -123,14 +129,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Actualiza el Reciclerview
+     * @param data: Nuevos datos con los que actualizar la vista
+     * @param adap: Adapter de la vista
+     */
     fun updateView(data:List<DaoReceta>,adap:ReciclerAdapter){
         adap.updateItems(data)
     }
 
-    private fun SearchView.setOnCloseListener(function: () -> Unit) {
-        getFromRetro()
-    }
-
+    // Objeto para almacenar los datos a mostrar en ReciclerView
     companion object{
         var dataSet: List<DaoReceta> = listOf<DaoReceta>()
     }
