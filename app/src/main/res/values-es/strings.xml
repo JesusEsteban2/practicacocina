@@ -15,4 +15,7 @@
     <string name="cal_ps">Cal/Racion</string>
     <string name="preparation">Preparación:</string>
     <string name="ingredi">Ingredientes:</string>
+    <string name="imagelink">Enlace a imagen</string>
+    <string name="tcTime">Tiempo de Prep. y Cocinado</string>
+    <string name="edit">Editar</string>
 </resources>

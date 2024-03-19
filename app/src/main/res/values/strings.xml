@@ -14,4 +14,7 @@
     <string name="cal_ps">Cal/Serv.</string>
     <string name="preparation">Preparation:</string>
     <string name="ingredi">Ingredients:</string>
+    <string name="imagelink">Image Link</string>
+    <string name="tcTime">Preparation + Cook Time</string>
+    <string name="edit">Edit</string>
 </resources>

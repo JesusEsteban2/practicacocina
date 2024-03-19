@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Material3.Light"
         tools:targetApi="31">
         <activity
-            android:name=".activities.Edit_Activity"
+            android:name=".activities.EditActivity"
             android:exported="false" />
         <activity
             android:name=".activities.DetailActivity"

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DetailActivity"
+    tools:context=".activities.EditActivity"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,15 @@
         >
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/vertical_centerline"
+            android:id="@+id/vertical_line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".30"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_line2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -24,186 +32,264 @@
             />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/recipeNameLa"
+            android:id="@+id/reNameLaEA"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/recipeName"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             >
 
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/recipeName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:enabled="false"
-            android:textSize="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-        </com.google.android.material.textfield.TextInputLayout>
-        <ImageView
-            android:id="@+id/reImage"
-            android:layout_width="280dp"
-            android:layout_height="280dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/vertical_centerline"
-            app:layout_constraintTop_toBottomOf="@+id/reName"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reNameEA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
             />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
         <ImageView
-            android:id="@+id/cuisIcon"
+            android:id="@+id/reImageEA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reNameLaEA"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reImageLaEA"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/imagelink"
+            app:layout_constraintStart_toStartOf="@id/reImageEA"
+            app:layout_constraintTop_toBottomOf="@id/reImageEA"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/imageLinkEA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/reImageLaEA"
+                app:layout_constraintTop_toTopOf="@+id/reImageLaEA"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/cuisIconEA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/flag_24"
-            app:layout_constraintStart_toEndOf="@id/vertical_centerline"
-            app:layout_constraintTop_toTopOf="@+id/reImage"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reImageLaEA"
             />
 
-        <TextView
-            android:id="@+id/reCuisine"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reCuisineLaEA"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginStart="5dp"
-            app:layout_constraintStart_toEndOf="@+id/cuisIcon"
-            app:layout_constraintTop_toBottomOf="@+id/reName"
-            />
+            android:hint="@string/cuisine"
+            app:layout_constraintStart_toEndOf="@+id/cuisIconEA"
+            app:layout_constraintEnd_toEndOf="@+id/vertical_line1"
+            app:layout_constraintTop_toBottomOf="@+id/reImageLaEA"
+            >
 
-        <TextView
-            android:id="@+id/reDifficulty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:textSize="16sp"
-            android:layout_marginStart="5dp"
-            app:layout_constraintStart_toStartOf="@id/vertical_centerline"
-            app:layout_constraintTop_toBottomOf="@+id/reCuisine"
-            />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reCuisineEA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/reCuidineLaEA"
+                app:layout_constraintTop_toTopOf="@+id/reCuidineLaEA"
+                />
 
-        <RatingBar
-            android:id="@+id/recipeRatingn"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reDifficultyLaEA"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:progressTint="@color/yelow"
-            app:layout_constraintStart_toEndOf="@id/vertical_centerline"
-            app:layout_constraintTop_toBottomOf="@+id/reDifficulty"
-            />
+            android:hint="@string/difficulty"
+            app:layout_constraintStart_toStartOf="@+id/cuisIconEA"
+            app:layout_constraintTop_toBottomOf="@+id/reCuisineLaEA"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reDifficultyEA"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/reDifficultyLaEA"
+                app:layout_constraintTop_toTopOf="@+id/reDifficultyLaEA"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reRatingLaEA"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/rating"
+            app:layout_constraintStart_toStartOf="@+id/vertical_line1"
+            app:layout_constraintTop_toBottomOf="@+id/reImageLaEA">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reRatingEA"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/reRatingLaEA"
+                app:layout_constraintTop_toTopOf="@+id/reRatingLaEA" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/timeIcon"
+            android:id="@+id/timeIconEA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/time_24"
-            app:layout_constraintStart_toStartOf="@+id/recipeRatingn"
-            app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toEndOf="@+id/vertical_line1"
+            app:layout_constraintTop_toBottomOf="@+id/reRatingLaEA"
             />
 
-        <TextView
-            android:id="@+id/rePrepTime"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/rePrepTimeEA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/timeIcon"
-            app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
+            app:layout_constraintStart_toEndOf="@+id/timeIconEA"
+            app:layout_constraintTop_toBottomOf="@+id/reRatingLaEA"
             />
 
         <TextView
-            android:id="@+id/plusSymbol"
+            android:id="@+id/plusSymbolEA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" + "
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/rePrepTime"
-            app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
-            />
-
-        <TextView
-            android:id="@+id/reCookTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/plusSymbol"
-            app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
-            />
-        <TextView
-            android:id="@+id/reCaloriesTit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cal_ps"
-            android:textSize="16sp"
-            android:layout_marginStart="5dp"
-            app:layout_constraintStart_toStartOf="@id/vertical_centerline"
-            app:layout_constraintTop_toBottomOf="@+id/reCookTime"
-            />
-
-        <TextView
-            android:id="@+id/reCaloriesPS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/reCaloriesTit"
-            app:layout_constraintTop_toBottomOf="@+id/reCookTime"
-            />
-
-        <TextView
-            android:id="@+id/reType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/vertical_centerline"
-            app:layout_constraintTop_toBottomOf="@+id/reCaloriesPS"
-            />
-
-
-        <TextView
-            android:id="@+id/texTitIngre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="@string/ingredi"
-            android:layout_marginStart="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reImage"
-            />
-
-        <TextView
-            android:id="@+id/reIngredients"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_marginStart="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/texTitIngre"
-            />
-
-        <TextView
-            android:id="@+id/texTitInstru"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="@string/preparation"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reIngredients"
-            />
+            app:layout_constraintStart_toEndOf="@+id/rePrepTimeEA"
+            app:layout_constraintTop_toTopOf="@+id/rePrepTimeEA"
+        />
 
-        <TextView
-            android:id="@+id/reInstructions"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/reCookTimeEA"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:paddingBottom="10dp"
             android:layout_marginStart="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/texTitInstru"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/plusSymbolEA"
+            app:layout_constraintTop_toTopOf="@+id/rePrepTimeEA"
             />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reCaloPSLaEA"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/cal_ps"
+            app:layout_constraintStart_toEndOf="@+id/vertical_line2"
+            app:layout_constraintTop_toBottomOf="@+id/reImageLaEA"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reCaloPSEA"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/reCaloPSLaEA"
+                app:layout_constraintTop_toTopOf="@+id/reCaloPSLaEA"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reTypeLaEA"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/mealType"
+            app:layout_constraintStart_toEndOf="@+id/vertical_line2"
+            app:layout_constraintTop_toBottomOf="@+id/reCaloPSLaEA"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reTypeEA"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/reTypeLaEA"
+                app:layout_constraintTop_toTopOf="@+id/reTypeLaEA"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reIngredLaEA"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ingredients"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reDifficultyLaEA"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reIngredEA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/reIngredLaEA"
+                app:layout_constraintTop_toTopOf="@+id/reIngredLaEA"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reInstrLaEA"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/instructions"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reIngredLaEA"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reInstrEA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/reInstrLaEA"
+                app:layout_constraintTop_toTopOf="@+id/reInstrLaEA"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

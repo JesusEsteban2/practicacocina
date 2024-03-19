@@ -2,9 +2,9 @@ package com.example.practicacocina.activities
 
 import DaoReceta
 import Receta
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.practicacocina.R
 import com.example.practicacocina.activities.MainActivity.Companion.dataSet
 import com.example.practicacocina.databinding.ActivityDetailBinding
 import com.squareup.picasso.Picasso
@@ -20,12 +20,13 @@ class DetailActivity : AppCompatActivity() {
         binding= ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Recupera intent putExtra con el registro a mostrar
+        // Recupera intent putExtra con el registro a Editar
         val idS=intent.extras?.getString("EXTRA_ID")?:"-1"
         var id=idS.toInt()
-        // Toma el elemento a mostrar de la colección
+        // Toma el elemento a editar de la colección
         var recipe=dataSet[id]
-        //Visualiza la receta seleccionada
+        //Edita la receta seleccionada
+        binding.editBotton.setOnClickListener{onClickEdit(id)}
         render(recipe)
 
     }
@@ -58,6 +59,12 @@ class DetailActivity : AppCompatActivity() {
         binding.reType.text=type
 
     }
+    fun onClickEdit(posi:Int){
+        val intent = Intent(this, EditActivity::class.java)
 
+        intent.putExtra("EXTRA_EDIT", posi.toString())
+        startActivity(intent)
+
+    }
 
 }

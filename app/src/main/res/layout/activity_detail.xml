@@ -146,8 +146,17 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/vertical_centerline"
         app:layout_constraintTop_toBottomOf="@+id/reCaloriesPS"
-        />
+    />
 
+    <Button
+        android:id="@+id/editBotton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+        app:layout_constraintTop_toBottomOf="@+id/reType"
+    />
 
     <TextView
         android:id="@+id/texTitIngre"
