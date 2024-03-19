@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.DetailActivity"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/Theme.AppCompat.Light"
+        >
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_centerline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".70"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recipeNameLa"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/recipeName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/recipeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:enabled="false"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        </com.google.android.material.textfield.TextInputLayout>
+        <ImageView
+            android:id="@+id/reImage"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/vertical_centerline"
+            app:layout_constraintTop_toBottomOf="@+id/reName"
+            />
+
+        <ImageView
+            android:id="@+id/cuisIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/flag_24"
+            app:layout_constraintStart_toEndOf="@id/vertical_centerline"
+            app:layout_constraintTop_toTopOf="@+id/reImage"
+            />
+
+        <TextView
+            android:id="@+id/reCuisine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@+id/cuisIcon"
+            app:layout_constraintTop_toBottomOf="@+id/reName"
+            />
+
+        <TextView
+            android:id="@+id/reDifficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textSize="16sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+            app:layout_constraintTop_toBottomOf="@+id/reCuisine"
+            />
+
+        <RatingBar
+            android:id="@+id/recipeRatingn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:progressTint="@color/yelow"
+            app:layout_constraintStart_toEndOf="@id/vertical_centerline"
+            app:layout_constraintTop_toBottomOf="@+id/reDifficulty"
+            />
+
+        <ImageView
+            android:id="@+id/timeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/time_24"
+            app:layout_constraintStart_toStartOf="@+id/recipeRatingn"
+            app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
+            />
+
+        <TextView
+            android:id="@+id/rePrepTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/timeIcon"
+            app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
+            />
+
+        <TextView
+            android:id="@+id/plusSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" + "
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/rePrepTime"
+            app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
+            />
+
+        <TextView
+            android:id="@+id/reCookTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/plusSymbol"
+            app:layout_constraintTop_toBottomOf="@+id/recipeRatingn"
+            />
+        <TextView
+            android:id="@+id/reCaloriesTit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cal_ps"
+            android:textSize="16sp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+            app:layout_constraintTop_toBottomOf="@+id/reCookTime"
+            />
+
+        <TextView
+            android:id="@+id/reCaloriesPS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/reCaloriesTit"
+            app:layout_constraintTop_toBottomOf="@+id/reCookTime"
+            />
+
+        <TextView
+            android:id="@+id/reType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/vertical_centerline"
+            app:layout_constraintTop_toBottomOf="@+id/reCaloriesPS"
+            />
+
+
+        <TextView
+            android:id="@+id/texTitIngre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="@string/ingredi"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reImage"
+            />
+
+        <TextView
+            android:id="@+id/reIngredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/texTitIngre"
+            />
+
+        <TextView
+            android:id="@+id/texTitInstru"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="@string/preparation"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reIngredients"
+            />
+
+        <TextView
+            android:id="@+id/reInstructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:paddingBottom="10dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/texTitInstru"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
+

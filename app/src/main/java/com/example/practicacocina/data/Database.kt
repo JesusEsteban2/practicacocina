@@ -1,6 +1,7 @@
 package com.example.practicacocina.data
 
 import DaoReceta
+import Receta
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -48,7 +49,7 @@ class Database (context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,D
 
     /**
      * Delete record by Id
-     * @param i: Id of Task to delete
+     * @param i: Id of Recipe to delete
      * @return: True if the delete is done.
      */
     fun deleteById(i:Int):Boolean{
@@ -63,7 +64,7 @@ class Database (context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,D
 
     /**
      * Update record by Id
-     * @param ta: Task to update
+     * @param r: Recipe to update
      * @return: True if the update is correct.
      */
     fun updateTask(r:DaoReceta):Boolean {
@@ -86,7 +87,12 @@ class Database (context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,D
         return (count>0)
     }
 
-    fun searchById(k:Int): DaoReceta? {
+    /**
+     * Devuelve una lista con 1 elemento que corresponde con el ID Buscado
+     * @param k Id a buscar
+     * @return Lista con las recetas
+     */
+    fun searchById(k:Int): List<DaoReceta>? {
 
         // Search by id
         val av=arrayOf<String>(k.toString())
@@ -96,61 +102,94 @@ class Database (context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,D
             null,null,null)
 
         // Log.i("DB","Obtenidos ${cursor.count} registros")
-        var t: DaoReceta? =null
 
-        if (cursor.moveToNext()) {
-            t=DaoReceta(cursor.getInt(0),cursor.getString(1),
-                cursor.getInt(2)==1,cursor.getInt(3))
-        }
+        // Llama a la función para crear la lista con los datos recuperados
+        val lt:MutableList<DaoReceta> = recupDatos(cursor)
+
+        // Cierra cursor y BBDD
         cursor.close()
         db.close()
 
-        return t
+        return lt
     }
 
-        fun searchByName():List<DaoReceta>{
+    /**
+     * Devuelve una lista con los elementos de la BBDD que contienen el String pasado
+     * @param n String a Buscar
+     * @return Lista con las recetas
+     */
+    fun searchByName(n:String):List<DaoReceta>?{
 
-            // Search by id
-            val av=arrayOf<String>(true.toString())
+        // Search by name
+        val av=arrayOf<String>("%$n%")
 
-            val db=this.writableDatabase
-            val cursor:Cursor = db.query(TABLE_NAME,null,"Doit = ?",av,
+        val db=this.writableDatabase
+        val cursor:Cursor = db.query(TABLE_NAME,null,"name LIKE ?",av,
                 null,null,null)
 
-            // Log.i("DB","Obtenidos ${cursor.count} registros")
-            val lt:MutableList<DaoReceta> = mutableListOf<DaoReceta>()
+        // Log.i("DB","Obtenidos ${cursor.count} registros")
 
-            while (cursor.moveToNext()) {
-                val t=DaoReceta(cursor.getInt(0),cursor.getString(1),
-                    cursor.getInt(2)==1,cursor.getInt(3))
-                lt.add(t)
-            }
-            cursor.close()
-            db.close()
+        // Llama a la función para crear la lista con los datos recuperados
+        val lt:MutableList<DaoReceta> = recupDatos(cursor)
 
-            return lt
-        }
+        // Cierra cursor y BBDD
+        cursor.close()
+        db.close()
 
-        fun searchAll():List<DaoReceta>{
+        return lt
+    }
 
-            val db=this.writableDatabase
-            val cursor:Cursor = db.query(TABLE_NAME,null,null,null,
+    /**
+     * Devuelve una lista con todos los elementos de la BBDD
+     * @return Lista con las recetas
+     */
+    fun searchAll():List<DaoReceta>{
+
+        val db=this.writableDatabase
+        val cursor:Cursor = db.query(TABLE_NAME,null,null,null,
                 null,null,null)
 
-            // Log.i("DB","Obtenidos ${cursor.count} registros")
-            val lt:MutableList<DaoReceta> = mutableListOf<DaoReceta>()
+        // Log.i("DB","Obtenidos ${cursor.count} registros")
 
-            while (cursor.moveToNext()) {
-                val t=DaoReceta(cursor.getInt(0),cursor.getString(1),
-                    cursor.getInt(2)==1,cursor.getInt(3))
-                lt.add(t)
-            }
-            cursor.close()
-            db.close()
+        // Llama a la función para crear la lista con los datos recuperados
+        val lt:MutableList<DaoReceta> = recupDatos(cursor)
 
-            return lt
+        // Cierra cursor y BBDD
+        cursor.close()
+        db.close()
+
+        return lt
+    }
+
+    /**
+     * Crea una lista de recetas con los datos devueltos pro la base de datos.
+     * @param c Cursor de la BBDD
+     * @return Lista de recetas MutableList<DaoReceta>
+     */
+    fun recupDatos (c:Cursor):MutableList<DaoReceta>{
+
+        val lt:MutableList<DaoReceta> = mutableListOf<DaoReceta>()
+
+        while (c.moveToNext()) {
+            val t=DaoReceta(c.getInt(0),c.getString(1),
+                c.getInt(2),c.getInt(3),c.getString(4),
+                c.getString(5),c.getString(6),listOf(c.getString(7)),
+                listOf(c.getString(8)),listOf(c.getString(9)),c.getInt(10),
+                c.getDouble(11))
+            lt.add(t)
         }
 
+        return lt
+    }
+
+
+
+    /**
+     * Crea un ContentValues (Clave,Valor) con los nombres de los campos de la BD y
+     * los valores pasados en la receta.
+     * @param re Receta para asignar los valores.
+     * @return ContentValues (Clave,Valor) (Columna DB,Valor de Receta)
+     */
     fun asigValues(re:DaoReceta):ContentValues{
 
         val values=ContentValues()
@@ -161,18 +200,18 @@ class Database (context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,D
         values.put(SQL_RECETAS_COLUMS[3],re.cuisine)
         values.put(SQL_RECETAS_COLUMS[4],re.difficulty)
         values.put(SQL_RECETAS_COLUMS[5],re.image)
-        values.put(SQL_RECETAS_COLUMS[6],re.ingredients)
-        values.put(SQL_RECETAS_COLUMS[7],re.instructions)
-        values.put(SQL_RECETAS_COLUMS[8],r.name)
-        values.put(SQL_RECETAS_COLUMS[9],r.doit)
-        values.put(SQL_RECETAS_COLUMS[10],r.doit)
+        values.put(SQL_RECETAS_COLUMS[6],Receta().listToString(re.ingredients))
+        values.put(SQL_RECETAS_COLUMS[7],Receta().listToString(re.instructions))
+        values.put(SQL_RECETAS_COLUMS[8],Receta().listToString(re.mealType))
+        values.put(SQL_RECETAS_COLUMS[9],re.prepTimeMin)
+        values.put(SQL_RECETAS_COLUMS[10],re.rating)
 
         return values
     }
 
     companion object {
         const val DATABASE_NAME="recetas.db"
-        const val DATABASE_VERSION=1
+        const val DATABASE_VERSION=2
         const val TABLE_NAME="Recipes"
         const val SQL_DELETE_TABLE_RECETAS="DROP TABLE IF EXISTS $TABLE_NAME"
         const val SQL_CREATE_ENTRIES_RECETAS ="CREATE TABLE $TABLE_NAME "+

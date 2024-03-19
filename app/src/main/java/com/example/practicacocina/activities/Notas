@@ -65,3 +65,6 @@ https://dev.kiwilimon.com/documentacion
                       private fun SearchView.setOnCloseListener(function: () -> Unit) {
                             getFromRetro()
                         }
+
+                        sintaxis Markdown
+                        https://markdown.es/sintaxis-markdown/

@@ -2,6 +2,8 @@ package com.example.practicacocina.activities
 
 import DaoCocina
 import DaoReceta
+import Receta
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +27,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var adapter: ReciclerAdapter
 
+    /**
+     * on Create se ejecuta al iniciar la Actividad
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,9 +45,18 @@ class MainActivity : AppCompatActivity() {
         binding.recipeReciclerW.adapter = adapter
         binding.recipeReciclerW.layoutManager = LinearLayoutManager(this)
 
+        // Si no se ha inicializado la BBDD
         // Hacer la llamada al API-Rest de Retrofit
         // para obtener los datos del API
-        getFromRetro()
+        // Si la BBDD está inicializada tomar los datos de
+        // la BBDD
+        if (getDbLoad()==false) {
+            getFromRetro()
+        } else {
+            dataSet=Receta().queryAll(binding.root.context)
+            updateView(dataSet,adapter)
+        }
+
 
 
     }
@@ -67,13 +81,15 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(query: String?): Boolean {
                 if (query.isNullOrEmpty()) {
-                    getFromRetro()
+                    dataSet=Receta().queryAll(binding.root.context)
+                    updateView(dataSet,adapter)
                     Log.i("BUSCA","Busqueda Todos")
                 } else {
-                    val data= dataSet.filterIndexed{ index, daoReceta ->
-                        dataSet[index].name.contains(query as CharSequence) }
-                    Log.i("BUSCA","Busqueda con texto")
-                    updateView(data,adapter)
+                    //val data= dataSet.filterIndexed{ index, daoReceta ->
+                    //    dataSet[index].name.contains(query as CharSequence) }
+                    var data= Receta().queryByName(binding.root.context,query)
+                    Log.i("BUSCA","Busqueda de $query")
+                    updateView(data!!,adapter)
                 }
 
                 return true
@@ -108,10 +124,15 @@ class MainActivity : AppCompatActivity() {
                 if ((respon?.body()?.recipes != null)) {
                     Log.i("HTTP", "MA- Respuesta correcta :)")
                     dataSet = respon?.body()!!.recipes
-                    updateView(dataSet,adapter)
+
                 } else {
                     Log.i("HTTP", "MA- Respuesta erronea, no se ha recibido nada :(")
                 }
+
+                Receta().insert(binding.root.context,dataSet)
+                updateView(dataSet,adapter)
+                setDbLoad(true)
+
             }
         }
     }
@@ -138,9 +159,23 @@ class MainActivity : AppCompatActivity() {
         adap.updateItems(data)
     }
 
+    fun setDbLoad(b:Boolean){
+        val sharedPref = this.getSharedPreferences("session", Context.MODE_PRIVATE)
+        with (sharedPref.edit()) {
+            putBoolean(DB_LOAD, b)
+            apply()
+        }
+    }
+
+    fun getDbLoad():Boolean{
+        val sharedPref = this.getSharedPreferences("session", Context.MODE_PRIVATE)
+        return sharedPref.getBoolean(DB_LOAD,false)
+    }
+
     // Objeto para almacenar los datos a mostrar en ReciclerView
     companion object{
         var dataSet: List<DaoReceta> = listOf<DaoReceta>()
+        val DB_LOAD="DB_LOAD"
     }
 
 }

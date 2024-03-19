@@ -54,6 +54,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     // Implementation Picasso 2.8
     implementation ("com.squareup.picasso:picasso:2.8")
+    implementation("androidx.activity:activity:1.8.0")
 
     val sqlite_version = "2.4.0"
     // Dependencias SQLite Java

@@ -1,6 +1,7 @@
 package com.example.practicacocina.activities
 
 import DaoReceta
+import Receta
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.practicacocina.R
@@ -44,34 +45,19 @@ class DetailActivity : AppCompatActivity() {
         binding.reCookTime.text=re.cookTimeMin.toString()
         binding.reCaloriesPS.text=re.calPerServing.toString()
 
-        var ingr=listToString(re.ingredients)
+        var ingr=Receta().listToString(re.ingredients)
 
         binding.reIngredients.text=ingr
 
-        var inst= listToString(re.instructions)
+        var inst= Receta().listToString(re.instructions)
 
         binding.reInstructions.text=inst
 
-        var type=listToString(re.mealType)
+        var type=Receta().listToString(re.mealType)
 
         binding.reType.text=type
 
     }
 
-    /**
-     * Función para convertir una lista en un string separado por comas
-     */
-    fun listToString(l:List<String>):String{
-        // Inicializa String a devolver
-        var retString:String=""
-        // Para cada elemento e de la lista l
-        for (e in l){
-            if (retString=="") {
-                retString=e
-            } else {
-                retString=retString+"\n"+e
-            }
-        }
-        return retString
-    }
+
 }
