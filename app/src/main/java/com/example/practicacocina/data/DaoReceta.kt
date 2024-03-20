@@ -31,6 +31,23 @@ class Receta{
     }
 
     /**
+     * Función para insertar una lista de recetas en la BBDD
+     * @param context Contexto de la operación
+     * @return true si no ha habido errores
+     */
+    fun update(context:Context,re:DaoReceta):Boolean {
+        var db= Database(context)
+        var ok:Boolean=false
+
+        ok = db.updateRecipe(re)
+        if (!ok) {
+            Log.i("DB", "Error al insertar id: " + re.id.toString())
+        }
+
+        return ok
+    }
+
+    /**
      * Función para obtener todos los registros de la BBDD
      * @param context Contexto de la operación
      * @return Lista de Recetas
@@ -93,18 +110,18 @@ data class DaoCocina(
  * Clase de datos Receta para el convertidor Json
  */
 data class DaoReceta (
-    @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("caloriesPerServing") val calPerServing: Int,
-    @SerializedName("cookTimeMinutes") val cookTimeMin: Int,
-    @SerializedName("cuisine") val cuisine: String,
-    @SerializedName("difficulty") val difficulty: String,
-    @SerializedName("image") val image: String,
-    @SerializedName("ingredients") val ingredients: List<String>,
-    @SerializedName("instructions") val instructions: List<String>,
-    @SerializedName("mealType") val mealType: List<String>,
-    @SerializedName("prepTimeMinutes") val prepTimeMin: Int,
-    @SerializedName("rating") val rating: Double,
+    @SerializedName("id") var id: Int,
+    @SerializedName("name") var name: String,
+    @SerializedName("caloriesPerServing") var calPerServing: Int,
+    @SerializedName("cookTimeMinutes") var cookTimeMin: Int,
+    @SerializedName("cuisine") var cuisine: String,
+    @SerializedName("difficulty") var difficulty: String,
+    @SerializedName("image") var image: String,
+    @SerializedName("ingredients") var ingredients: List<String>,
+    @SerializedName("instructions") var instructions: List<String>,
+    @SerializedName("mealType") var mealType: List<String>,
+    @SerializedName("prepTimeMinutes") var prepTimeMin: Int,
+    @SerializedName("rating") var rating: Double,
     //@SerializedName("reviewCount") val reviewCount: Int,
     //@SerializedName("servings") val servings: Int,
     //@SerializedName("tags") val tags: List<String>,

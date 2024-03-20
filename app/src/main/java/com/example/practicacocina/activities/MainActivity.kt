@@ -85,8 +85,6 @@ class MainActivity : AppCompatActivity() {
                     updateView(dataSet,adapter)
                     Log.i("BUSCA","Busqueda Todos")
                 } else {
-                    //val data= dataSet.filterIndexed{ index, daoReceta ->
-                    //    dataSet[index].name.contains(query as CharSequence) }
                     var data= Receta().queryByName(binding.root.context,query)
                     Log.i("BUSCA","Busqueda de $query")
                     updateView(data!!,adapter)
@@ -102,6 +100,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        dataSet=Receta().queryAll(binding.root.context)
+        updateView(dataSet,adapter)
+    }
 
     /**
      * Funcion para obtener los datos del API con Retrofit

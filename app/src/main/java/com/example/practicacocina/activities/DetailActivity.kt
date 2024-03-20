@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso
 class DetailActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityDetailBinding
+    var id:Int=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +23,18 @@ class DetailActivity : AppCompatActivity() {
 
         // Recupera intent putExtra con el registro a Editar
         val idS=intent.extras?.getString("EXTRA_ID")?:"-1"
-        var id=idS.toInt()
-        // Toma el elemento a editar de la colección
-        var recipe=dataSet[id]
+        id=idS.toInt()
+
         //Edita la receta seleccionada
         binding.editBotton.setOnClickListener{onClickEdit(id)}
-        render(recipe)
+        // dataSet=Receta().queryAll(binding.root.context)
+        render(dataSet[id])
+    }
 
+    override fun onResume() {
+        super.onResume()
+        dataSet=Receta().queryAll(binding.root.context)
+        render(dataSet[id])
     }
 
     /**
@@ -64,7 +70,6 @@ class DetailActivity : AppCompatActivity() {
 
         intent.putExtra("EXTRA_EDIT", posi.toString())
         startActivity(intent)
-
     }
 
 }

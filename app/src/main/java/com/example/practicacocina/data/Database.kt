@@ -67,7 +67,7 @@ class Database (context: Context): SQLiteOpenHelper(context,DATABASE_NAME,null,D
      * @param r: Recipe to update
      * @return: True if the update is correct.
      */
-    fun updateTask(r:DaoReceta):Boolean {
+    fun updateRecipe(r:DaoReceta):Boolean {
 
         val values=asigValues(r)
             values.put("ID",r.id)
