@@ -17,4 +17,5 @@
     <string name="imagelink">Image Link</string>
     <string name="tcTime">Preparation + Cook Time</string>
     <string name="edit">Edit</string>
+    <string name="save">Save</string>
 </resources>
